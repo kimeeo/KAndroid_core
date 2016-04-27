@@ -24,5 +24,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
 
     //Permission
+    //This libray takes care of the runtime Permissions
+    //https://github.com/ParkSangGwon/TedPermission
+    //https://github.com/kimeeo/TedPermission
     compile 'com.github.kimeeo:TedPermission:064cbbbeba'
 }
