@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="_permission_rationale_message">we need below permission to run the app smothly</string>
+    <string name="_permission_denied_message">If you reject permission,you can not use this service\n\nPlease turn on permissions at Setting > Permission</string>
+    <string name="_permission_rationale_confirm_text">Give Permission</string>
+    <string name="_permission_denied_close_button_text">It\'s ok, I don\'t want this</string>
+    <string name="_doNotAskAgain">Do not ask again</string>
+</resources>
