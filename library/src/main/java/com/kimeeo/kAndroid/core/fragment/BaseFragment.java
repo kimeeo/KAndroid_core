@@ -37,7 +37,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
     public Application getApplication() {
         return getActivity().getApplication();
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
