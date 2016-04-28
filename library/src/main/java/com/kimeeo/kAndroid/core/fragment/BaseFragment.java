@@ -1,18 +1,16 @@
 package com.kimeeo.kAndroid.core.fragment;
 
 import android.app.Application;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.View;
 
 import com.gun0912.tedpermission.PermissionListener;
+import com.kimeeo.kAndroid.core.R;
 import com.kimeeo.kAndroid.core.app.BaseApplication;
 import com.kimeeo.kAndroid.core.app.IFragmentWatcher;
 import com.kimeeo.kAndroid.core.permissions.PermissionsHelper;
-import com.kimeeo.kAndroid.core.R;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
@@ -26,7 +24,6 @@ public class BaseFragment extends Fragment implements IApplicationAware
 {
     private static final String LOG_TAG= "BaseFragment";
     private static final String DATA= "data";
-
     @Override
     public BaseApplication getApp(){
         if(getActivity().getApplication() instanceof BaseApplication)
@@ -37,7 +34,6 @@ public class BaseFragment extends Fragment implements IApplicationAware
     public Application getApplication() {
         return getActivity().getApplication();
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +51,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
             handlePermissions();
     }
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
         garbageCollectorCall();
         if(getActivity()!=null && getActivity() instanceof IFragmentWatcher)
@@ -143,8 +138,6 @@ public class BaseFragment extends Fragment implements IApplicationAware
         return true;
     }
     //PARAMS Ends
-
-
     //Permissions Starts
     PermissionListener onPermission = new PermissionListener() {
         @Override
@@ -205,27 +198,94 @@ public class BaseFragment extends Fragment implements IApplicationAware
     }
     //Permissions ENDS
 
-
-
     //New Instance Starts
-    public static BaseFragment newInstance(Class<View> clazz,Bundle bundle) {
+    public static Fragment newInstance(Class<Fragment> clazz,Bundle bundle) {
         try {
             Constructor constructor = clazz.getConstructor();
-            BaseFragment baseFragment = (BaseFragment) constructor.newInstance();
+            Fragment baseFragment = (Fragment) constructor.newInstance();
             if(bundle!=null)
                 baseFragment.setArguments(bundle);
             return baseFragment;
 
         } catch (Exception e) {
             System.out.println(e);
+            Log.e(LOG_TAG, "BaseFragment creation fail. " + clazz);
         }
-        Log.e(LOG_TAG, "BaseFragment creation fail. " + clazz);
         return null;
     }
-    public static BaseFragment newInstance(Class<View> clazz) {
-        return newInstance(clazz,null);
+    public static Fragment newInstance(Class<Fragment> clazz) {
+        try {
+            Constructor constructor = clazz.getConstructor();
+            Fragment baseFragment = (Fragment) constructor.newInstance();
+            return baseFragment;
+        } catch (Exception e) {
+            System.out.println(e);
+            Log.e(LOG_TAG, "BaseFragment creation fail. " + clazz);
+        }
+
+        return null;
     }
-    public static BaseFragment newInstance(Class<View> clazz,Object data) {
+    public static Fragment newInstance(Class<Fragment> clazz,Map<String, Object> data) {
+        Bundle args = new Bundle();
+        for (Map.Entry<String, Object> entry : ((Map<String, Object>) data).entrySet()) {
+            if (entry.getValue() != null) {
+                if (entry.getValue() instanceof String)
+                    args.putString(entry.getKey(), (String) entry.getValue());
+                else if (entry.getValue() instanceof String[])
+                    args.putStringArray(entry.getKey(), (String[]) entry.getValue());
+                else if (entry.getValue() instanceof Integer)
+                    args.putInt(entry.getKey(), (Integer) entry.getValue());
+                else if (entry.getValue() instanceof int[])
+                    args.putIntArray(entry.getKey(), (int[]) entry.getValue());
+                else if (entry.getValue() instanceof Boolean)
+                    args.putBoolean(entry.getKey(), (Boolean) entry.getValue());
+                else if (entry.getValue() instanceof boolean[])
+                    args.putBooleanArray(entry.getKey(), (boolean[]) entry.getValue());
+                else if (entry.getValue() instanceof Bundle)
+                    args.putBundle(entry.getKey(), (Bundle) entry.getValue());
+                else if (entry.getValue() instanceof Byte)
+                    args.putByte(entry.getKey(), (Byte) entry.getValue());
+                else if (entry.getValue() instanceof byte[])
+                    args.putByteArray(entry.getKey(), (byte[]) entry.getValue());
+                else if (entry.getValue() instanceof Character)
+                    args.putChar(entry.getKey(), (Character) entry.getValue());
+                else if (entry.getValue() instanceof char[])
+                    args.putCharArray(entry.getKey(), (char[]) entry.getValue());
+                else if (entry.getValue() instanceof CharSequence)
+                    args.putCharSequence(entry.getKey(), (CharSequence) entry.getValue());
+                else if (entry.getValue() instanceof CharSequence[])
+                    args.putCharSequenceArray(entry.getKey(), (CharSequence[]) entry.getValue());
+                else if (entry.getValue() instanceof Serializable)
+                    args.putSerializable(entry.getKey(), (Serializable) entry.getValue());
+                else if (entry.getValue() instanceof Short)
+                    args.putShort(entry.getKey(), (Short) entry.getValue());
+                else if (entry.getValue() instanceof short[])
+                    args.putShortArray(entry.getKey(), (short[]) entry.getValue());
+                else if (entry.getValue() instanceof Double)
+                    args.putDouble(entry.getKey(), (Double) entry.getValue());
+                else if (entry.getValue() instanceof double[])
+                    args.putDoubleArray(entry.getKey(), (double[]) entry.getValue());
+                else if (entry.getValue() instanceof Float)
+                    args.putFloat(entry.getKey(), (Float) entry.getValue());
+                else if (entry.getValue() instanceof float[])
+                    args.putFloatArray(entry.getKey(), (float[]) entry.getValue());
+                else if (entry.getValue() instanceof Long)
+                    args.putLong(entry.getKey(), (Long) entry.getValue());
+                else if (entry.getValue() instanceof long[])
+                    args.putLongArray(entry.getKey(), (long[]) entry.getValue());
+                else if (entry.getValue() instanceof Parcelable)
+                    args.putParcelable(entry.getKey(), (Parcelable) entry.getValue());
+                else if (entry.getValue() instanceof Parcelable[])
+                    args.putParcelableArray(entry.getKey(), (Parcelable[]) entry.getValue());
+                else {
+                    Log.e(LOG_TAG, "This type is not supported. Key:" + entry.getKey() + ",   Value:" + entry.getValue());
+                    args.putString(entry.getKey(), entry.getValue().toString());
+                }
+            }
+        }
+        return newInstance(clazz,args);
+    }
+    public static Fragment newInstance(Class<Fragment> clazz,Object data) {
         if(data!=null) {
             Bundle args = new Bundle();
             if (data instanceof Map) {
@@ -343,7 +403,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
             return newInstance(clazz,args);
         }
         else
-            return newInstance(clazz,null);
+            return newInstance(clazz);
     }
     //New Instance Ends
 }

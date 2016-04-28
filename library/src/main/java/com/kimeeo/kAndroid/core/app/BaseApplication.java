@@ -19,23 +19,16 @@ abstract public class BaseApplication extends Application implements IFragmentWa
     private boolean is7inchTablet = false;
     private boolean is10inchTablet = false;
     private boolean isPhone = true;
-
-
-
-    public void onFragmentDestroy(Fragment fragment)
-    {
+    public void onFragmentDestroy(Fragment fragment) {
 
     }
-    public void onFragmentCreate(Fragment fragment)
-    {
+    public void onFragmentCreate(Fragment fragment) {
 
     }
-
     public void onLowMemory() {
         super.onLowMemory();
     }
-    public boolean isConnected()
-    {
+    public boolean isConnected(){
         try
         {
             return NetworkUtilities.isConnected(this);
@@ -45,12 +38,10 @@ abstract public class BaseApplication extends Application implements IFragmentWa
         }
         return false;
     }
-
     private boolean watchLeak = false;
     public boolean isWatchLeak() {
         return watchLeak;
     }
-
     final public void onCreate() {
         super.onCreate();
 
@@ -77,36 +68,25 @@ abstract public class BaseApplication extends Application implements IFragmentWa
             is7inchTablet = false;
             is10inchTablet = false;
         }
-
         configApplication();
     }
     abstract public void configApplication();
-
-
     public String getAccountPhone() {
         return "";
     }
-
     public boolean isTablet() {
         return isTablet;
     }
-
     public boolean isIs7inchTablet() {
         return is7inchTablet;
     }
-
     public boolean isIs10inchTablet() {
         return is10inchTablet;
     }
-
     public boolean isPhone() {
         return isPhone;
     }
-
     public String getUUID() {
         return uuid;
     }
-
-
-
 }
