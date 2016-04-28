@@ -199,7 +199,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
     //Permissions ENDS
 
     //New Instance Starts
-    public static Fragment newInstance(Class<Fragment> clazz,Bundle bundle) {
+    public static Fragment newInstance(Class clazz,Bundle bundle) {
         try {
             Constructor constructor = clazz.getConstructor();
             Fragment baseFragment = (Fragment) constructor.newInstance();
@@ -213,7 +213,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
         }
         return null;
     }
-    public static Fragment newInstance(Class<Fragment> clazz) {
+    public static Fragment newInstance(Class clazz) {
         try {
             Constructor constructor = clazz.getConstructor();
             Fragment baseFragment = (Fragment) constructor.newInstance();
@@ -225,7 +225,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
 
         return null;
     }
-    public static Fragment newInstance(Class<Fragment> clazz,Map<String, Object> data) {
+    public static Fragment newInstance(Class clazz,Map<String, Object> data) {
         Bundle args = new Bundle();
         for (Map.Entry<String, Object> entry : ((Map<String, Object>) data).entrySet()) {
             if (entry.getValue() != null) {
@@ -285,7 +285,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
         }
         return newInstance(clazz,args);
     }
-    public static Fragment newInstance(Class<Fragment> clazz,Object data) {
+    public static Fragment newInstance(Class clazz,Object data) {
         if(data!=null) {
             Bundle args = new Bundle();
             if (data instanceof Map) {
