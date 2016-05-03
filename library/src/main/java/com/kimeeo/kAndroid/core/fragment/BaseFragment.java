@@ -67,59 +67,61 @@ public class BaseFragment extends Fragment implements IApplicationAware
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Bundle bundle = getArguments();
-        for (String key : bundle.keySet()) {
-            Object data=bundle.get(key);
-            if (data instanceof String)
-                outState.putString(key, (String) data);
-            else if (data instanceof String[])
-                outState.putStringArray(key, (String[]) data);
-            else if (data instanceof Integer)
-                outState.putInt(key, (Integer) data);
-            else if (data instanceof int[])
-                outState.putIntArray(key, (int[]) data);
-            else if (data instanceof Boolean)
-                outState.putBoolean(key, (Boolean) data);
-            else if (data instanceof boolean[])
-                outState.putBooleanArray(key, (boolean[]) data);
-            else if (data instanceof Bundle)
-                outState.putBundle(key, (Bundle) data);
-            else if (data instanceof Byte)
-                outState.putByte(key, (Byte) data);
-            else if (data instanceof byte[])
-                outState.putByteArray(key, (byte[]) data);
-            else if (data instanceof Character)
-                outState.putChar(key, (Character) data);
-            else if (data instanceof char[])
-                outState.putCharArray(key, (char[]) data);
-            else if (data instanceof CharSequence)
-                outState.putCharSequence(key, (CharSequence) data);
-            else if (data instanceof CharSequence[])
-                outState.putCharSequenceArray(key, (CharSequence[]) data);
-            else if (data instanceof Serializable)
-                outState.putSerializable(key, (Serializable) data);
-            else if (data instanceof Short)
-                outState.putShort(key, (Short) data);
-            else if (data instanceof short[])
-                outState.putShortArray(key, (short[]) data);
-            else if (data instanceof Double)
-                outState.putDouble(key, (Double) data);
-            else if (data instanceof double[])
-                outState.putDoubleArray(key, (double[]) data);
-            else if (data instanceof Float)
-                outState.putFloat(key, (Float) data);
-            else if (data instanceof float[])
-                outState.putFloatArray(key, (float[]) data);
-            else if (data instanceof Long)
-                outState.putLong(key, (Long) data);
-            else if (data instanceof long[])
-                outState.putLongArray(key, (long[]) data);
-            else if (data instanceof Parcelable)
-                outState.putParcelable(key, (Parcelable) data);
-            else if (data instanceof Parcelable[])
-                outState.putParcelableArray(key, (Parcelable[]) data);
-            else {
-                Log.e(LOG_TAG, "This type is not supported. Key:" + key + ",   Value:" + data);
-                outState.putString(key, data.toString());
+        if(bundle!=null && bundle.keySet().size()!=0) {
+            for (String key : bundle.keySet()) {
+                Object data = bundle.get(key);
+                if (data instanceof String)
+                    outState.putString(key, (String) data);
+                else if (data instanceof String[])
+                    outState.putStringArray(key, (String[]) data);
+                else if (data instanceof Integer)
+                    outState.putInt(key, (Integer) data);
+                else if (data instanceof int[])
+                    outState.putIntArray(key, (int[]) data);
+                else if (data instanceof Boolean)
+                    outState.putBoolean(key, (Boolean) data);
+                else if (data instanceof boolean[])
+                    outState.putBooleanArray(key, (boolean[]) data);
+                else if (data instanceof Bundle)
+                    outState.putBundle(key, (Bundle) data);
+                else if (data instanceof Byte)
+                    outState.putByte(key, (Byte) data);
+                else if (data instanceof byte[])
+                    outState.putByteArray(key, (byte[]) data);
+                else if (data instanceof Character)
+                    outState.putChar(key, (Character) data);
+                else if (data instanceof char[])
+                    outState.putCharArray(key, (char[]) data);
+                else if (data instanceof CharSequence)
+                    outState.putCharSequence(key, (CharSequence) data);
+                else if (data instanceof CharSequence[])
+                    outState.putCharSequenceArray(key, (CharSequence[]) data);
+                else if (data instanceof Serializable)
+                    outState.putSerializable(key, (Serializable) data);
+                else if (data instanceof Short)
+                    outState.putShort(key, (Short) data);
+                else if (data instanceof short[])
+                    outState.putShortArray(key, (short[]) data);
+                else if (data instanceof Double)
+                    outState.putDouble(key, (Double) data);
+                else if (data instanceof double[])
+                    outState.putDoubleArray(key, (double[]) data);
+                else if (data instanceof Float)
+                    outState.putFloat(key, (Float) data);
+                else if (data instanceof float[])
+                    outState.putFloatArray(key, (float[]) data);
+                else if (data instanceof Long)
+                    outState.putLong(key, (Long) data);
+                else if (data instanceof long[])
+                    outState.putLongArray(key, (long[]) data);
+                else if (data instanceof Parcelable)
+                    outState.putParcelable(key, (Parcelable) data);
+                else if (data instanceof Parcelable[])
+                    outState.putParcelableArray(key, (Parcelable[]) data);
+                else {
+                    Log.e(LOG_TAG, "This type is not supported. Key:" + key + ",   Value:" + data);
+                    outState.putString(key, data.toString());
+                }
             }
         }
     }
