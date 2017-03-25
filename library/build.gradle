@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -24,14 +24,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    final SUPPORT_LIBRARY_VERSION = '24.1.1'
+    final SUPPORT_LIBRARY_VERSION = '25.3.0'
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
 
     //Permission
     //This libray takes care of the runtime Permissions
     //https://github.com/ParkSangGwon/TedPermission
     //https://github.com/kimeeo/TedPermission
-    compile ('com.github.kimeeo:TedPermission:v1.0.9@aar'){
+    compile ('com.github.kimeeo:TedPermission:1.1.0@aar'){
         transitive=true
     }
 }
