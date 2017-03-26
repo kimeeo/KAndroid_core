@@ -24,6 +24,7 @@ public class BaseFragment extends Fragment implements IApplicationAware
 {
     private static final String LOG_TAG= "BaseFragment";
     private static final String DATA= "data";
+
     @Override
     public BaseApplication getApp(){
         if(getActivity().getApplication() instanceof BaseApplication)
@@ -140,6 +141,9 @@ public class BaseFragment extends Fragment implements IApplicationAware
         return true;
     }
     //PARAMS Ends
+
+
+
     //Permissions Starts
     PermissionListener onPermission = new PermissionListener() {
         @Override
@@ -158,22 +162,43 @@ public class BaseFragment extends Fragment implements IApplicationAware
         return null;
     }
     protected String[] getFriendlyPermissionsMeaning() {return null;}
+
     protected void handlePermissions() {
         if(requirePermissions()!=null) {
-            PermissionsHelper permissionsHelper = createPermissionsHelper();
+            PermissionsHelper permissionsHelper = createPermissionsHelper(onPermission);
             permissionsHelper.check(requirePermissions(), getFriendlyPermissionsMeaning());
         }
     }
-    protected PermissionsHelper createPermissionsHelper() {
+
+    public void handlePermissions(String[] requirePermissions,String[] getFriendlyPermissionsMeaning,PermissionListener onPermission) {
+        if(requirePermissions!=null) {
+
+            PermissionsHelper permissionsHelper = createPermissionsHelper(onPermission);
+            if(getFriendlyPermissionsMeaning!=null)
+                permissionsHelper.check(requirePermissions, getFriendlyPermissionsMeaning);
+            else
+                permissionsHelper.check(requirePermissions);
+        }
+    }
+
+    public void handlePermissions(String[] requirePermissions,PermissionListener onPermission) {
+        if(requirePermissions!=null) {
+
+            PermissionsHelper permissionsHelper = createPermissionsHelper(onPermission);
+            permissionsHelper.check(requirePermissions);
+        }
+    }
+
+    protected PermissionsHelper createPermissionsHelper(PermissionListener onPermission) {
         PermissionsHelper permissionsHelper = new PermissionsHelper(getContext());
         permissionsHelper.setShowRationaleConfirm(getShowRationaleConfirm());
-        permissionsHelper.setOnPermission(onPermission);
+        if(onPermission!=null)
+            permissionsHelper.setOnPermission(onPermission);
         permissionsHelper.setRationaleConfirmText(getRationaleConfirmText());
         permissionsHelper.setRationaleMessage(getRationaleMessage());
         permissionsHelper.setShowDeniedMessage(getShowDeniedMessage());
         permissionsHelper.setDeniedCloseButtonText(getDeniedCloseButtonText());
         permissionsHelper.setDeniedMessage(getDeniedMessage());
-
         return permissionsHelper;
     }
     protected boolean getShowDeniedMessage() {
