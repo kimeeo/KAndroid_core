@@ -159,8 +159,10 @@ public class BaseFragment extends Fragment implements IApplicationAware
     }
     protected String[] getFriendlyPermissionsMeaning() {return null;}
     protected void handlePermissions() {
-        PermissionsHelper permissionsHelper = createPermissionsHelper();
-        permissionsHelper.check(requirePermissions(),getFriendlyPermissionsMeaning());
+        if(requirePermissions()!=null) {
+            PermissionsHelper permissionsHelper = createPermissionsHelper();
+            permissionsHelper.check(requirePermissions(), getFriendlyPermissionsMeaning());
+        }
     }
     protected PermissionsHelper createPermissionsHelper() {
         PermissionsHelper permissionsHelper = new PermissionsHelper(getContext());
