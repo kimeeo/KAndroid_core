@@ -33,7 +33,7 @@ dependencies {
     //https://github.com/kimeeo/TedPermission
 
 
-    final TED_PERMISSION_VERSION = 'V3.1.0Beta'
+    final TED_PERMISSION_VERSION = 'Ant-V1.0.0'
     compile ("com.github.kimeeo:TedPermission:$TED_PERMISSION_VERSION@aar"){
         transitive=true
     }
