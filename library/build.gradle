@@ -24,7 +24,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    final SUPPORT_LIBRARY_VERSION = '25.3.0'
+    final SUPPORT_LIBRARY_VERSION = '25.4.0'
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
 
     //Permission
@@ -32,7 +32,9 @@ dependencies {
     //https://github.com/ParkSangGwon/TedPermission
     //https://github.com/kimeeo/TedPermission
 
-    compile ('com.github.kimeeo:TedPermission:V3.0.6Beta@aar'){
+
+    final TED_PERMISSION_VERSION = 'V3.1.0Beta'
+    compile ("com.github.kimeeo:TedPermission:$TED_PERMISSION_VERSION@aar"){
         transitive=true
     }
 }
