@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.view.View;
 
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -11,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class IDUtil
 {
-    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
+    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(11111111);
     @SuppressLint("NewApi")
     public static int generateViewId() {
         if (Build.VERSION.SDK_INT < 17) {
@@ -28,4 +29,12 @@ public class IDUtil
             return View.generateViewId();
         }
     }
+
+    public static Random r = new Random();
+    public static int generateRandomId(int min,int max) {
+        if(min==0)
+            min=1;
+        return r.nextInt(max - min + 1) + min;
+    }
+
 }
